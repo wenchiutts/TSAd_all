@@ -90,7 +90,7 @@ const TSAdFullScreen = ({
 	route,
 	navigation,
 	mediaSource = "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-	// iconSource = require("../assets/icon.png"),
+	iconSource,
 	linkUrl = "https://play.google.com/store/apps/details?id=com.ins.reports.analyzer.insta.followers.tracker",
 }) => {
 	const [countNum, setCountNum] = React.useState(5);
