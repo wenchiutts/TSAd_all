@@ -29,6 +29,7 @@
 	},
 	"dependencies": {
 		"react-native-progress": "^3.6.0",
-		"@react-native-community/art": "git+https://github.com/Brewskey/art.git"
+		"@react-native-community/art": "git+https://github.com/Brewskey/art.git",
+		"ramda": "^0.27.1"
 	}
 }

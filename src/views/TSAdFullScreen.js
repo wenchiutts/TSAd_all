@@ -6,6 +6,7 @@ import {
 	Dimensions,
 	Animated,
 	Easing,
+	Modal,
 } from "react-native";
 import styled from "styled-components/native";
 import { Video } from "expo-av";
@@ -21,14 +22,14 @@ const StyledTSAdBanner = styled(TSAdBanner)`
 	width: ${screenWidth * 0.8};
 	height: 86;
 	position: absolute;
-	bottom: 0;
+	bottom: 10;
 	left: 50%;
 	elevation: 3;
 `;
 
 const ContentContainer = styled(View)`
 	width: ${screenWidth};
-	height: ${screenHeight - 70};
+	height: ${screenHeight - 45};
 	background-color: pink;
 `;
 
@@ -72,7 +73,7 @@ const StyledText = styled(Text)`
 
 const StyledButton = styled(TouchableOpacity)`
 	position: absolute;
-	top: 30;
+	top: 10;
 	left: 16;
 	width: 32;
 	height: 32;
@@ -87,43 +88,49 @@ const ButtonWrapper = styled(View)`
 `;
 
 const TSAdFullScreen = ({
-	route,
-	navigation,
+	openFullScreen,
+	setOpenFullScreen,
 	mediaSource = "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-	iconSource,
+	iconSource = {
+		uri:
+			"https://firebasestorage.googleapis.com/v0/b/ins-reports-prod.appspot.com/o/Logo-3.png?alt=media",
+	},
 	linkUrl = "https://play.google.com/store/apps/details?id=com.ins.reports.analyzer.insta.followers.tracker",
 }) => {
 	const [countNum, setCountNum] = React.useState(5);
-	// const { mediaSource, iconSource, linkUrl } = route?.params;
 
 	return (
-		<View style={{ backgroundColor: "#030303", position: "relative" }}>
-			<ButtonWrapper>
-				<CancelButton
-					onPress={() => navigation.goBack()}
-					style={{ marginTop: 30, marginBottom: 10 }}
-				/>
-				{countNum !== 0 && (
-					<CountingdownButton countNum={countNum} setCountNum={setCountNum} />
-				)}
-			</ButtonWrapper>
-			<ContentContainer>
-				<Video
-					source={{ uri: mediaSource }}
-					rate={1.0}
-					volume={1.0}
-					resizeMode="contain"
-					shouldPlay={true}
-					isLooping
-					style={{ width: "100%", height: "100%" }}
-				/>
-				<StyledTSAdBanner
-					style={{ transform: [{ translateX: -((screenWidth * 0.8) / 2) }] }}
-					iconSource={iconSource}
-					linkUrl={linkUrl}
-				/>
-			</ContentContainer>
-		</View>
+		<Modal visible={openFullScreen}>
+			<View
+				style={{ backgroundColor: "#030303", position: "absolute", top: 0 }}
+			>
+				<ButtonWrapper>
+					<CancelButton
+						onPress={() => setOpenFullScreen(false)}
+						style={{ marginTop: 10, marginBottom: 5 }}
+					/>
+					{countNum !== 0 && (
+						<CountingdownButton countNum={countNum} setCountNum={setCountNum} />
+					)}
+				</ButtonWrapper>
+				<ContentContainer>
+					<Video
+						source={{ uri: mediaSource }}
+						rate={1.0}
+						volume={1.0}
+						resizeMode="contain"
+						shouldPlay={true}
+						isLooping
+						style={{ width: "100%", height: "100%" }}
+					/>
+					<StyledTSAdBanner
+						style={{ transform: [{ translateX: -((screenWidth * 0.8) / 2) }] }}
+						iconSource={iconSource}
+						linkUrl={linkUrl}
+					/>
+				</ContentContainer>
+			</View>
+		</Modal>
 	);
 };
 
