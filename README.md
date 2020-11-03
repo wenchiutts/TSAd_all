@@ -1,4 +1,9 @@
-# TSAd_all
+# tsad_all
+
+### Install
+```
+yarn add git+https://github.com/wenchiutts/TSAd_all.git
+```
 
 ### Usage
 
