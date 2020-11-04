@@ -90,8 +90,7 @@ const ButtonWrapper = styled(View)`
 const TSAdFullScreen = ({
 	isVisible,
 	setIsVisible,
-	mediaSource:
-		"https://firebasestorage.googleapis.com/v0/b/ins-reports-prod.appspot.com/o/inappads.mp4?alt=media",
+	mediaSource = "https://firebasestorage.googleapis.com/v0/b/ins-reports-prod.appspot.com/o/inappads.mp4?alt=media",
 	iconSource = {
 		uri:
 			"https://firebasestorage.googleapis.com/v0/b/ins-reports-prod.appspot.com/o/Logo-3.png?alt=media",
