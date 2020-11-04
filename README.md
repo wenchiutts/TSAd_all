@@ -1,13 +1,21 @@
 # tsad_all
 
 ### Install
+
 ```
 yarn add git+https://github.com/wenchiutts/TSAd_all.git
 ```
 
 ### Usage
 
+### Import
+
+```
+import { TSAdBanner, TSAdFullScreen, useAdModal } from "tsad_all";
+```
+
 #### TSAdBanner
+
 ```
 <TSAdBanner
   title="Reports for Instagram"
@@ -34,21 +42,21 @@ const scrollBannerContent = [
 ];
 ```
 
-
 #### TSAdFullScreen
-```
-const [openFullScreen, setOpenFullScreen] = React.useState(false);
 
-{openFullScreen ? (
-  <TSAdFullScreen
-    openFullScreen={openFullScreen}
-    setOpenFullScreen={setOpenFullScreen}
-    iconSource={{
-      uri:
-        "https://firebasestorage.googleapis.com/v0/b/ins-reports-prod.appspot.com/o/Logo-3.png?alt=media",
-    }}
-    mediaSource="http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"
-    linkUrl="https://play.google.com/store/apps/details?id=com.ins.reports.analyzer.insta.followers.tracker"
-  />
-) : null}
+```
+const { openAd, ...adConfig } = useAdModal({
+		iconSource: {
+			uri:
+				"https://firebasestorage.googleapis.com/v0/b/ins-reports-prod.appspot.com/o/Logo-3.png?alt=media",
+		},
+		mediaSource:
+			"https://firebasestorage.googleapis.com/v0/b/ins-reports-prod.appspot.com/o/inappads.mp4?alt=media",
+		linkUrl:
+			"https://play.google.com/store/apps/details?id=com.ins.reports.analyzer.insta.followers.tracker",
+	});
+
+<TSAdFullScreen {...adConfig} />
+
+<Button  title="button"  onPress={() => openAd()}	/>
 ```

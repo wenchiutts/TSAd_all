@@ -88,9 +88,10 @@ const ButtonWrapper = styled(View)`
 `;
 
 const TSAdFullScreen = ({
-	openFullScreen,
-	setOpenFullScreen,
-	mediaSource = "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+	isVisible,
+	setIsVisible,
+	mediaSource:
+		"https://firebasestorage.googleapis.com/v0/b/ins-reports-prod.appspot.com/o/inappads.mp4?alt=media",
 	iconSource = {
 		uri:
 			"https://firebasestorage.googleapis.com/v0/b/ins-reports-prod.appspot.com/o/Logo-3.png?alt=media",
@@ -99,14 +100,18 @@ const TSAdFullScreen = ({
 }) => {
 	const [countNum, setCountNum] = React.useState(5);
 
+	React.useEffect(() => {
+		isVisible && setCountNum(5);
+	}, [isVisible]);
+
 	return (
-		<Modal visible={openFullScreen}>
+		<Modal visible={isVisible}>
 			<View
 				style={{ backgroundColor: "#030303", position: "absolute", top: 0 }}
 			>
 				<ButtonWrapper>
 					<CancelButton
-						onPress={() => setOpenFullScreen(false)}
+						onPress={() => setIsVisible(false)}
 						style={{ marginTop: 10, marginBottom: 5 }}
 					/>
 					{countNum !== 0 && (
@@ -118,7 +123,7 @@ const TSAdFullScreen = ({
 						source={{ uri: mediaSource }}
 						rate={1.0}
 						volume={1.0}
-						resizeMode="contain"
+						resizeMode="cover"
 						shouldPlay={true}
 						isLooping
 						style={{ width: "100%", height: "100%" }}
