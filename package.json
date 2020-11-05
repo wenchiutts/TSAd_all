@@ -18,7 +18,8 @@
 	"peerDependencies": {
 		"react-native": "https://github.com/expo/react-native/archive/sdk-36.0.1.tar.gz",
 		"react": "~16.9.0",
-		"expo": "~38.0.0"
+		"expo": "~38.0.0",
+		"expo-av": "^8.0.0"
 	},
 	"devDependencies": {
 		"@babel/cli": "7.1.0",
@@ -27,7 +28,6 @@
 		"@babel/runtime": "^7.12.1"
 	},
 	"dependencies": {
-		"expo-av": "^8.0.0",
 		"react-native-progress": "^3.6.0",
 		"@react-native-community/art": "git+https://github.com/Brewskey/art.git",
 		"react-native-web": "~0.14.7",
