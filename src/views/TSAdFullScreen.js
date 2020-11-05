@@ -1,36 +1,46 @@
 import * as React from "react";
 import {
+	Platform,
 	View,
 	Text,
 	TouchableOpacity,
 	Dimensions,
 	Animated,
 	Easing,
-	Modal,
+	Modal as NativeModal,
 } from "react-native";
 import styled from "styled-components/native";
 import { Video } from "expo-av";
 // import * as Progress from "react-native-progress";
+import WebModal from "modal-enhanced-react-native-web";
 
 import Colors from "../constants/Colors";
 import TSAdBanner from "./TSAdBanner";
 import CancelButton from "../components/CancelButton";
 
+const Modal = Platform.select({
+	web: WebModal,
+	default: NativeModal,
+});
+
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
 const StyledTSAdBanner = styled(TSAdBanner)`
 	width: ${screenWidth * 0.8};
+	max-width: 300;
 	height: 86;
 	position: absolute;
-	bottom: 10;
+	bottom: 0;
 	left: 50%;
 	elevation: 3;
 `;
 
 const ContentContainer = styled(View)`
-	width: ${screenWidth};
-	height: ${screenHeight - 45};
-	background-color: pink;
+	width: ${screenWidth * 0.9};
+	height: ${(screenHeight - 45) * 0.9};
+	max-width: 360;
+	max-height: 960;
+	background-color: #030303;
 `;
 
 const CountingdownButton = ({ countNum, setCountNum }) => {
@@ -44,7 +54,6 @@ const CountingdownButton = ({ countNum, setCountNum }) => {
 		// 	useNativeDriver: false,
 		// 	easing: Easing.linear,
 		// }).start();
-
 		setCountNum(5);
 		let interval = setInterval(() => setCountNum((prev) => prev - 1), 1000);
 		setTimeout(() => clearInterval(interval), 5800);
@@ -117,7 +126,13 @@ const TSAdFullScreen = ({
 	return (
 		<Modal visible={isVisible}>
 			<View
-				style={{ backgroundColor: "#030303", position: "absolute", top: 0 }}
+				style={{
+					backgroundColor: "#030303",
+					position: "absolute",
+					top: 0,
+					maxWidth: 540,
+					maxHeight: 960,
+				}}
 			>
 				<ButtonWrapper>
 					<CancelButton
@@ -129,17 +144,28 @@ const TSAdFullScreen = ({
 					)}
 				</ButtonWrapper>
 				<ContentContainer>
-					<Video
-						source={{ uri: mediaSource }}
-						rate={1.0}
-						volume={1.0}
-						resizeMode="cover"
-						shouldPlay={true}
-						isLooping
-						style={{ width: "100%", height: "100%" }}
-					/>
+					{isVisible ? (
+						<Video
+							source={{ uri: mediaSource }}
+							rate={1.0}
+							volume={1.0}
+							resizeMode="cover"
+							shouldPlay={isVisible}
+							isLooping
+							style={{
+								width: "100%",
+								height: "100%",
+								maxWidth: 540,
+								maxHeight: 960,
+							}}
+						/>
+					) : null}
 					<StyledTSAdBanner
-						style={{ transform: [{ translateX: -((screenWidth * 0.8) / 2) }] }}
+						style={{
+							transform: [
+								{ translateX: -Math.min((screenWidth * 0.8) / 2, 150) },
+							],
+						}}
 						iconSource={iconSource}
 						linkUrl={linkUrl}
 					/>

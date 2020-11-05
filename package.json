@@ -28,6 +28,7 @@
 		"@babel/runtime": "^7.12.1"
 	},
 	"dependencies": {
+		"modal-enhanced-react-native-web": "^0.2.0",
 		"react-native-progress": "^3.6.0",
 		"@react-native-community/art": "git+https://github.com/Brewskey/art.git",
 		"ramda": "^0.27.1"
