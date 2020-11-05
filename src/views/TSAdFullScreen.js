@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import styled from "styled-components/native";
 import { Video } from "expo-av";
-import * as Progress from "react-native-progress";
+// import * as Progress from "react-native-progress";
 
 import Colors from "../constants/Colors";
 import TSAdBanner from "./TSAdBanner";
@@ -34,16 +34,16 @@ const ContentContainer = styled(View)`
 `;
 
 const CountingdownButton = ({ countNum, setCountNum }) => {
-	const progress = React.useRef(new Animated.Value(0)).current;
+	// const progress = React.useRef(new Animated.Value(0)).current;
 
 	React.useEffect(() => {
-		progress.setValue(0);
-		Animated.timing(progress, {
-			toValue: 1,
-			duration: 5000,
-			useNativeDriver: false,
-			easing: Easing.linear,
-		}).start();
+		// progress.setValue(0);
+		// Animated.timing(progress, {
+		// 	toValue: 1,
+		// 	duration: 5000,
+		// 	useNativeDriver: false,
+		// 	easing: Easing.linear,
+		// }).start();
 
 		setCountNum(5);
 		let interval = setInterval(() => setCountNum((prev) => prev - 1), 1000);
@@ -52,18 +52,29 @@ const CountingdownButton = ({ countNum, setCountNum }) => {
 
 	return (
 		<StyledButton>
-			<Progress.Circle
+			{/* <Progress.Circle
 				size={32}
 				style={{ position: "absolute" }}
 				borderWidth={0}
 				color={Colors.purple}
 				progress={progress._value}
 				thickness={4}
-			/>
+			/> */}
+			<RoundView></RoundView>
 			<StyledText>{countNum}</StyledText>
 		</StyledButton>
 	);
 };
+
+const RoundView = styled(View)`
+	position: absolute;
+	width: 36;
+	height: 36;
+	border-radius: 18;
+	border-width: 4;
+	border-color: ${Colors.purple};
+	background-color: transparent;
+`;
 
 const StyledText = styled(Text)`
 	font-size: 14;
