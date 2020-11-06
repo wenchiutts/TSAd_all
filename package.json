@@ -28,7 +28,7 @@
 	},
 	"dependencies": {
 		"expo-av": "^8.0.0",
-		"react-native-progress": "^3.6.0",
+		"react-native-progress": "^4.1.2",
 		"@react-native-community/art": "git+https://github.com/Brewskey/art.git",
 		"ramda": "^0.27.1"
 	}
